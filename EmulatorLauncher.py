@@ -14,7 +14,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #
-#	EDU-CIAA Python editor (2016)
+#	EDU-CIAA Python emulator (2016)
 #	
 #	<ernestogigliotti@gmail.com>
 #
@@ -30,10 +30,27 @@ import os
 import threading
 from SerialMock import SerialMock
 from emulator.Emulate import Emulate
+import signal
+
+# debug
+#import logging
+#logger = logging.getLogger('myapp')
+#hdlr = logging.FileHandler('/var/tmp/myapp.log')
+#formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+#hdlr.setFormatter(formatter)
+#logger.addHandler(hdlr) 
+#logger.setLevel(logging.INFO)
+#_______
+
 
 BASE_PATH,filename = os.path.split(sys.argv[0])
 if(BASE_PATH==""):
     BASE_PATH="."
+
+def exitEvent(signum,frame):
+	print("EXIT BY SYGNAL")
+	sys.exit(0)
+
 
 class EmulatorLauncher:
 	def __init__(self,panelEm,serialMock,file):
@@ -45,6 +62,7 @@ class EmulatorLauncher:
 		self.threadServer = threading.Thread(target=self.__runServer, args=())
 		self.threadServer.setDaemon(1)
 		self.threadServer.start()
+		#logger.info('Inicio thread de server')
 	def __runServer(self):
 		self.port=10000
 		self.flagConnOk=False
@@ -71,6 +89,7 @@ class EmulatorLauncher:
 			self.connection = connection
 			while True:
 				data = connection.recv(4096)
+				#logger.info('Llego data:'+str(data))
 				if data:
 					try:
 						parts = data.split("}{")
@@ -86,34 +105,48 @@ class EmulatorLauncher:
 								self.panelEmulator.update(data)
 					except:
 						print("ERROR RCV")
+						#logger.info('ERROR RVC')
 				else:
 					print >>sys.stderr, 'no more data from', client_address
+					#logger.info('Data vino vacio')
 					break
 		except:
-			connection.close()				
+			connection.close()
+			#logger.info('Server.Cierro la conexion en except')			
 		finally:
 			# Clean up the connection
 			connection.close()		
+			#logger.info('Server.Cierro la conexion en finally')
+
+		#logger.info('FIN del thread del server')
 
 	def startEmulator(self):
 		self.threadEmulator = threading.Thread(target=self.__runEmulator, args=())
 		self.threadEmulator.setDaemon(1)
 		self.threadEmulator.start()
+		#logger.info('Inicio thread de emulador')
 			
 	def __runEmulator(self):
 		self.serialMock.insertText("\x15")
 		e = Emulate()
 		while self.flagConnOk==False:
 			time.sleep(1)
+		#logger.info('Inicio emulador')
 		e.start(self.file,self.port)
+		#logger.info('FIN emulador y thread')
+
 
 	def closeAll(self):
 		self.connection.close()
-		gtk.main_quit()
+		os.kill(0,signal.SIGTERM)
+		#gtk.main_quit()
 
 
 if len(sys.argv) == 2:
 	file = sys.argv[1]
+
+	signal.signal(signal.SIGTERM,exitEvent)
+	signal.signal(signal.SIGINT,exitEvent)
 		
 	gtk.gdk.threads_init()
 	c = PanelEmulator(BASE_PATH)

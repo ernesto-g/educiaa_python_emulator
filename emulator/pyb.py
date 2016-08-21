@@ -145,10 +145,12 @@ class Switch:
 		while True:
 			time.sleep(0.1)
 			#print("pool estado sw")
-			if PeripheralMockManager.cpu.sws[self.__sn] == False:
-				if self.__state0==False:
-					self.__fnCallback(self)
-					self.__state0 = True
-			else:
-				self.__state0 = False
-				
+			try:
+				if PeripheralMockManager.cpu.sws[self.__sn] == False:
+					if self.__state0==False:
+						self.__fnCallback(self)
+						self.__state0 = True
+				else:
+					self.__state0 = False
+			except:
+				break
