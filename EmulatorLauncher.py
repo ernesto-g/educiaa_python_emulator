@@ -139,9 +139,9 @@ class EmulatorLauncher:
 	def closeAll(self):
 		self.connection.close()
 		if sys.platform != 'win32':
-			os.kill(0,signal.SIGTERM)
+			os.kill(os.getpid(),signal.SIGTERM)
 		else:
-			os.kill(0,signal.CTRL_BREAK_EVENT)		
+			os.kill(os.getpid(),signal.CTRL_BREAK_EVENT)		
 		#gtk.main_quit()
 
 
