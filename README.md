@@ -40,7 +40,7 @@ $ python EmulatorLauncher.py script.py
 
 ```sh
 $ cd PyInstaller-3.1
-$ python pyinstaller.py --clean --ico ../icons/icon.ico ../EmulatorLauncher.py
+$ python pyinstaller.py --clean --noconsole --ico ../icons/icon.ico ../EmulatorLauncher.py
 ```
 Executable file EmulatorLauncher.exe will be found in EmulatorLauncher/dist/EmulatorLauncher directory.
 Copy files in PyInstaller-3.1/extraFiles to PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher
@@ -49,7 +49,7 @@ Copy files in PyInstaller-3.1/extraFiles to PyInstaller-3.1/EmulatorLauncher/dis
 
 ```sh
 $ cd PyInstaller-3.1
-$ python pyinstaller.py --clean --ico ../icons/icon.ico ../EmulatorLauncher.py
+$ python pyinstaller.py --clean --noconsole --ico ../icons/icon.ico ../EmulatorLauncher.py
 ```
 Executable file EmulatorLauncher will be found in EmulatorLauncher/dist/EmulatorLauncher directory.
 Copy files in PyInstaller-3.1/extraFiles to PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher
