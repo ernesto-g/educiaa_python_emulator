@@ -141,7 +141,8 @@ class EmulatorLauncher:
 		if sys.platform != 'win32':
 			os.kill(os.getpid(),signal.SIGTERM)
 		else:
-			os.kill(os.getpid(),signal.CTRL_BREAK_EVENT)		
+			#os.kill(os.getpid(),signal.CTRL_BREAK_EVENT)		
+			os.kill(os.getpid(),signal.SIGINT)		
 		#gtk.main_quit()
 
 
