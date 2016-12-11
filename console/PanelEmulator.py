@@ -49,17 +49,21 @@ class PanelEmulator:
 		self.window.set_title("EDU-CIAA Emulator Panel")
 
 		self.buttonOk = builder.get_object("btnSw1")
-		self.buttonOk.connect("clicked", self.__btnSw1, None)
+		self.buttonOk.connect("pressed", self.__btnSw1, (False))
+		self.buttonOk.connect("released", self.__btnSw1, (True))
 
 		self.buttonOk = builder.get_object("btnSw2")
-		self.buttonOk.connect("clicked", self.__btnSw2, None)
+		self.buttonOk.connect("pressed", self.__btnSw2, (False))
+		self.buttonOk.connect("released", self.__btnSw2, (True))
 
 		self.buttonOk = builder.get_object("btnSw3")
-		self.buttonOk.connect("clicked", self.__btnSw3, None)
+		self.buttonOk.connect("pressed", self.__btnSw3, (False))
+		self.buttonOk.connect("released", self.__btnSw3, (True))
 
 
 		self.buttonOk = builder.get_object("btnSw4")
-		self.buttonOk.connect("clicked", self.__btnSw4, None)
+		self.buttonOk.connect("pressed", self.__btnSw4, (False))
+		self.buttonOk.connect("released", self.__btnSw4, (True))
 
 		#leds
 		self.chkLed1 = builder.get_object("chkLed1")
@@ -71,34 +75,55 @@ class PanelEmulator:
 		self.imgBkg = builder.get_object("image1")
 		self.imgBkg.set_from_file(basePath+"/educiaa.png")
 		
+
+		#menu -------------------------------------------------------------------------
+		self.mnuItemGpio = builder.get_object("imagemenuitem1")
+		self.mnuItemGpio.set_label("GPIOs")
+		self.mnuItemGpio.connect("activate", self.__mnuGpios, None)
+		
+		self.mnuItemUart = builder.get_object("imagemenuitem2")
+		self.mnuItemUart.set_label("UART")
+		self.mnuItemUart.connect("activate", self.__mnuUart, None)
+		
+		self.mnuItem485 = builder.get_object("imagemenuitem3")
+		self.mnuItem485.set_label("RS-485")
+		self.mnuItem485.connect("activate", self.__mnu485, None)
+		
+		self.mnuItemTimers = builder.get_object("imagemenuitem4")
+		self.mnuItemTimers.set_label("Timers")
+		self.mnuItemTimers.connect("activate", self.__mnuTimers, None)
+
+		self.mnuItemTimers = builder.get_object("imagemenuitem5")
+		self.mnuItemTimers.set_label("Quit")
+		self.mnuItemTimers.connect("activate", self.__mnuQuit, None)
+
+		self.mnuItemTimers = builder.get_object("imagemenuitem10")
+		self.mnuItemTimers.set_label("About")
+		self.mnuItemTimers.connect("activate", self.__mnuAbout, None)
+		#-----------------------------------------------------------------------------
+		
 		self.window.show_all()
 
+		
+		
 	def showConsole(self,port,serialMock):
 		self.c.showConsole(port,serialMock)
 
-	def __btnSw1(self,a1,a2):
+	def __btnSw1(self,a1,stat):
 		if self.__socket!=None:
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":0,"swv":False}))
-			time.sleep(0.1)
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":0,"swv":True}))			
+			self.__socket.sendall(json.dumps({"per":"Switch","swn":0,"swv":stat}))
 		
-	def __btnSw2(self,a1,a2):
+	def __btnSw2(self,a1,stat):
 		if self.__socket!=None:
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":1,"swv":False}))
-			time.sleep(0.1)
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":1,"swv":True}))			
+			self.__socket.sendall(json.dumps({"per":"Switch","swn":1,"swv":stat}))
 
-	def __btnSw3(self,a1,a2):
+	def __btnSw3(self,a1,stat):
 		if self.__socket!=None:
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":2,"swv":False}))
-			time.sleep(0.1)
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":2,"swv":True}))			
+			self.__socket.sendall(json.dumps({"per":"Switch","swn":2,"swv":stat}))
 
-	def __btnSw4(self,a1,a2):
+	def __btnSw4(self,a1,stat):
 		if self.__socket!=None:
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":3,"swv":False}))
-			time.sleep(0.1)
-			self.__socket.sendall(json.dumps({"per":"Switch","swn":3,"swv":True}))			
+			self.__socket.sendall(json.dumps({"per":"Switch","swn":3,"swv":stat}))
 
 	def update(self,data):
 		if data["per"]=="LED":
@@ -131,6 +156,26 @@ class PanelEmulator:
 		self.window.destroy()
 		if self.__emulatorLauncher!=None:
 			self.__emulatorLauncher.closeAll()
-			
+	
+	# Menu items events
 	def setEmulatorLauncher(self,el):
 		self.__emulatorLauncher = el
+		
+	def __mnuGpios(self,widget,arg):
+		print("se selcciono GPIOS")
+		
+	def __mnuUart(self,widget,arg):
+		print("se selcciono uart")
+	
+	def __mnu485(self,widget,arg):
+		print("se selcciono rs485")
+	
+	def __mnuTimers(self,widget,arg):
+		print("se selcciono timers")
+	
+	def __mnuQuit(self,widget,arg):
+		self.__closePanel(None)
+	
+	def __mnuAbout(self,widget,arg):
+		print("se selcciono about")
+	#______________________	
