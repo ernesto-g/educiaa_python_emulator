@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="window1">
+    <child>
+      <object class="GtkFixed" id="fixed1">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkLabel" id="label1">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_0</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut0">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff0">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label2">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_1</property>
+          </object>
+          <packing>
+            <property name="y">20</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut1">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">20</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff1">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">20</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label3">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_2</property>
+          </object>
+          <packing>
+            <property name="y">40</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut2">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">40</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff2">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">40</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label4">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_3</property>
+          </object>
+          <packing>
+            <property name="y">60</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut3">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">60</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff3">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">60</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label5">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_4</property>
+          </object>
+          <packing>
+            <property name="y">80</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut4">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">80</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff4">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">80</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label6">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_5</property>
+          </object>
+          <packing>
+            <property name="y">100</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut5">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">100</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff5">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">100</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label7">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_6</property>
+          </object>
+          <packing>
+            <property name="y">120</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut6">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">120</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff6">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">120</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label8">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_7</property>
+          </object>
+          <packing>
+            <property name="y">140</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut7">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">140</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff7">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">140</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="label9">
+            <property name="width_request">70</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">GPIO_8</property>
+          </object>
+          <packing>
+            <property name="y">160</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInOut8">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">IN</property>
+          </object>
+          <packing>
+            <property name="x">70</property>
+            <property name="y">160</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="chkOnOff8">
+            <property name="width_request">100</property>
+            <property name="height_request">20</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">170</property>
+            <property name="y">160</property>
+          </packing>
+        </child>
+
+
+
+		
+      </object>
+    </child>
+  </object>
+</interface>

@@ -28,6 +28,7 @@ import struct
 import time
 import datetime
 from console.Console import Console
+from peripherals.GPIOsPanel import GPIOsPanel
 import json
 
 class PanelEmulator:
@@ -35,6 +36,7 @@ class PanelEmulator:
 		self.c = Console(basePath)
 		self.__socket = None
 		self.__emulatorLauncher = None
+		self.__basePath = basePath
 		
 		try:
 			builder = gtk.Builder()
@@ -157,12 +159,14 @@ class PanelEmulator:
 		if self.__emulatorLauncher!=None:
 			self.__emulatorLauncher.closeAll()
 	
-	# Menu items events
 	def setEmulatorLauncher(self,el):
 		self.__emulatorLauncher = el
 		
+	# Menu items events
 	def __mnuGpios(self,widget,arg):
 		print("se selcciono GPIOS")
+		gpiosWindow = GPIOsPanel(self.__basePath)
+		
 		
 	def __mnuUart(self,widget,arg):
 		print("se selcciono uart")
