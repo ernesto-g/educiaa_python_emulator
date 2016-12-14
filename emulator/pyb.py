@@ -30,6 +30,9 @@ class CPUMock:
 	def __init__(self):
 		self.sws = [True,True,True,True]		
 		self.leds = [False,False,False,False,0,0,0]
+		self.gpiosValue = [0,0,0,0,0,0,0,0,0]
+		self.gpiosMode = [0,0,0,0,0,0,0,0,0]
+		self.gpiosPull = [0,0,0,0,0,0,0,0,0]
 
 class PeripheralMockManager:
 	socket = None
@@ -76,6 +79,8 @@ class PeripheralMockManager:
 				
 			if data["per"]=="Switch":
 				PeripheralMockManager.cpu.sws[data["swn"]] = data["swv"]
+			if data["per"]=="GPIO":
+				PeripheralMockManager.cpu.gpiosValue[data["gpion"]] = data["gpiov"]
 			if data["per"]=="STDIN":
 				if data["data"]=="\n" or data["data"]=="\r\n":
 					PeripheralMockManager.stdinCondition.acquire()
@@ -98,6 +103,11 @@ class PeripheralMockManager:
 	def updateLeds():
 		PeripheralMockManager.sendData(json.dumps({"per":"LED","data":PeripheralMockManager.cpu.leds}))
 
+	@staticmethod
+	def updateGpios():
+		PeripheralMockManager.sendData(json.dumps({"per":"GPIO","data":PeripheralMockManager.cpu.gpiosValue,"data2":PeripheralMockManager.cpu.gpiosMode}))
+		#pass
+		
 	@staticmethod
 	def readStdin():
 		while True:
@@ -154,3 +164,37 @@ class Switch:
 					self.__state0 = False
 			except:
 				break
+
+class Pin:
+	IN = 0
+	OUT_PP = 1
+	OUT_OD = 2
+
+	PULL_NONE = 0
+	PULL_UP = 1
+	PULL_DOWN = 2
+	
+	def __init__(self,gpioNumber):
+		if gpioNumber>=9:
+			raise Exception("Invalid GPIO "+str(gpioNumber))
+			
+		self.__gpioNumber = gpioNumber
+	
+	def init(self,mode,pull):
+		PeripheralMockManager.cpu.gpiosMode[self.__gpioNumber] = mode
+		PeripheralMockManager.cpu.gpiosPull[self.__gpioNumber] = pull
+		PeripheralMockManager.updateGpios()
+		
+	def low(self):
+		if PeripheralMockManager.cpu.gpiosMode[self.__gpioNumber]!=Pin.IN:
+			PeripheralMockManager.cpu.gpiosValue[self.__gpioNumber] = 0
+			PeripheralMockManager.updateGpios()
+
+	def high(self):
+		if PeripheralMockManager.cpu.gpiosMode[self.__gpioNumber]!=Pin.IN:
+			PeripheralMockManager.cpu.gpiosValue[self.__gpioNumber] = 1
+			PeripheralMockManager.updateGpios()
+		
+	def value(self):
+		return PeripheralMockManager.cpu.gpiosValue[self.__gpioNumber]
+		

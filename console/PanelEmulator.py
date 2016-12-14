@@ -37,6 +37,7 @@ class PanelEmulator:
 		self.__socket = None
 		self.__emulatorLauncher = None
 		self.__basePath = basePath
+		self.gpiosWindow = None
 		
 		try:
 			builder = gtk.Builder()
@@ -148,6 +149,9 @@ class PanelEmulator:
 			colorStr+= "%0.2X" % b
 			self.lblRgb.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#'+colorStr))
 			gtk.gdk.threads_leave()
+		elif data["per"]=="GPIO":
+			if self.gpiosWindow!=None:
+				self.gpiosWindow.update(data)
 	
 		
 	def setSocket(self,socket):
@@ -164,9 +168,8 @@ class PanelEmulator:
 		
 	# Menu items events
 	def __mnuGpios(self,widget,arg):
-		print("se selcciono GPIOS")
-		gpiosWindow = GPIOsPanel(self.__basePath)
-		
+		self.gpiosWindow = GPIOsPanel(self.__basePath)
+		self.gpiosWindow.setSocket(self.__socket)
 		
 	def __mnuUart(self,widget,arg):
 		print("se selcciono uart")
