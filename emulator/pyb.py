@@ -203,3 +203,61 @@ class Pin:
 	def value(self):
 		return PeripheralMockManager.cpu.gpiosValue[self.__gpioNumber]
 		
+	def internal_getGpioNumber(self):
+		return self.__gpioNumber
+
+class ExtInt:
+	IRQ_RISING = 0
+	IRQ_FALLING = 1
+	IRQ_RISING_FALLING = 2
+	
+	def __init__(self,pinObj,irqMode,pull,callback):
+		self.__pinObj=pinObj
+		self.__irqMode=irqMode
+		self.__pull=pull
+		self.__fnCallback=callback
+		self.__line = pinObj.internal_getGpioNumber()
+		self.__enable=True
+		self.__state0 = PeripheralMockManager.cpu.gpiosValue[self.__line]
+		self.__state1 = self.__state0
+
+		t = threading.Thread(target=self.__callbackPool)
+		t.daemon = True
+		t.start()
+		
+	def line(self):
+		return self.__line
+		
+	def enable(self):
+		self.__enable=True
+		
+	def disable(self):
+		self.__enable=False
+		
+	def swint(self):
+		self.__fnCallback(self.__line)
+		
+	def __callbackPool(self):
+		while True:
+			time.sleep(0.1)
+			#print("pool estado sw")
+			try:
+				self.__state1 = PeripheralMockManager.cpu.gpiosValue[self.__line]
+				
+				if self.__irqMode == ExtInt.IRQ_RISING:
+					if  self.__state1 == True and self.__state0 == False:
+						if self.__enable:
+							self.__fnCallback(self.__line)
+				elif self.__irqMode == ExtInt.IRQ_FALLING:
+					if  self.__state1 == False and self.__state0 == True:
+						if self.__enable:
+							self.__fnCallback(self.__line)
+				elif self.__irqMode == ExtInt.IRQ_RISING_FALLING:
+					if  (self.__state1 == False and self.__state0 == True) or (self.__state1 == True and self.__state0 == False):
+						if self.__enable:
+							self.__fnCallback(self.__line)
+						
+				self.__state0 = self.__state1
+			except:
+				break
+	
