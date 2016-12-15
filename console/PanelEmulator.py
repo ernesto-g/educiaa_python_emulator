@@ -31,6 +31,17 @@ from console.Console import Console
 from peripherals.GPIOsPanel import GPIOsPanel
 import json
 
+from threading import Lock
+class SocketMultiThread:
+	def __init__(self,socket):
+		self.socket = socket
+		self.mutex = Lock()
+		
+	def sendall(self,data):
+		self.mutex.acquire()
+		self.socket.sendall(data)
+		self.mutex.release()
+
 class PanelEmulator:
 	def __init__(self,basePath):
 		self.c = Console(basePath)
@@ -155,7 +166,7 @@ class PanelEmulator:
 	
 		
 	def setSocket(self,socket):
-		self.__socket = socket
+		self.__socket = SocketMultiThread(socket)
 	
 	def __closePanel(self,arg):
 		self.c.closeConsole()
@@ -168,8 +179,10 @@ class PanelEmulator:
 		
 	# Menu items events
 	def __mnuGpios(self,widget,arg):
-		self.gpiosWindow = GPIOsPanel(self.__basePath)
-		self.gpiosWindow.setSocket(self.__socket)
+		if self.gpiosWindow==None:
+			self.gpiosWindow = GPIOsPanel(self.__basePath,self.__closeGpioWindowEvent,self.__socket)
+	def __closeGpioWindowEvent(self):
+		self.gpiosWindow = None
 		
 	def __mnuUart(self,widget,arg):
 		print("se selcciono uart")

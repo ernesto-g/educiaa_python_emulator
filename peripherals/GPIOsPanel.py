@@ -30,8 +30,11 @@ import datetime
 import json
 
 class GPIOsPanel:
-	def __init__(self,basePath):
+	def __init__(self,basePath,closeCallback,socket):
 		self.__socket = None
+		self.__flagFirstTime=True
+		self.__closeCallback=closeCallback
+		self.__flagUpdate=False
 		
 		try:
 			builder = gtk.Builder()
@@ -54,12 +57,20 @@ class GPIOsPanel:
 			self.gpiosStateChk.append(builder.get_object("chkOnOff"+str(i)))
 			self.gpiosStateChk[i].connect("clicked", self.__checkEvent, (i))
 
-		self.window.show_all()
-	
-		
-	def setSocket(self,socket):
 		self.__socket = socket
-	
+		self.__threadRequestRunning=True
+		self.t = threading.Thread(target=self.__sendStatusRequest)
+		self.t.start()
+
+			
+		self.window.show_all()
+		
+	def __sendStatusRequest(self):
+		while self.__threadRequestRunning:
+			if self.__socket!=None:
+				self.__socket.sendall(json.dumps({"per":"GPIOREQUEST"})) # request initial data
+			time.sleep(1)
+		
 	def __checkEvent(self,widget,index):
 		if self.gpiosStateChk[index]!=None:
 			if self.gpiosInOutLbls[index].get_text()=="IN":
@@ -73,6 +84,8 @@ class GPIOsPanel:
 	
 	
 	def update(self,data):
+		self.__flagUpdate=True
+		gtk.gdk.threads_enter()				
 		if data["per"]=="GPIO":
 
 			for i in range(0,9):
@@ -81,6 +94,11 @@ class GPIOsPanel:
 				if valInOut==0: # IN
 					self.gpiosInOutLbls[i].set_text("IN")
 					self.gpiosStateChk[i].set_sensitive(True)
+					if self.__flagFirstTime:
+						if val==1:
+							self.gpiosStateChk[i].set_active(True)
+						else:
+							self.gpiosStateChk[i].set_active(False)										
 				else: # OUT
 					self.gpiosInOutLbls[i].set_text("OUT")
 					self.gpiosStateChk[i].set_sensitive(False)
@@ -88,9 +106,14 @@ class GPIOsPanel:
 						self.gpiosStateChk[i].set_active(True)
 					else:
 						self.gpiosStateChk[i].set_active(False)					
-	
+
+			self.__flagFirstTime=False
+			self.__threadRequestRunning=False # stop thread requesting for initial data
+		gtk.gdk.threads_leave()
+		self.__flagUpdate=False
 	
 	def __closePanel(self,arg):
-		self.c.closeConsole()
+		self.__threadRequestRunning=False
+		self.__closeCallback()
 		self.window.destroy()
 	

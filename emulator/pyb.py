@@ -67,20 +67,26 @@ class PeripheralMockManager:
 			try:
 				data = PeripheralMockManager.socket.recv(4096)
 			except:
-				print(">>pyb>>RCV ERROR")
+				print(">>pyb>>RCV ERROR. closing socket")
 				PeripheralMockManager.socket.close()
 				return
 			
 			try:
 				data = json.loads(data)
 			except:
-				PeripheralMockManager.socket.close()
-				return
+				if len(data)==0:
+					print(">>pyb>>RCV ERROR JSON. closing socket")				
+					PeripheralMockManager.socket.close()
+					return
+				else:
+					continue
 				
 			if data["per"]=="Switch":
 				PeripheralMockManager.cpu.sws[data["swn"]] = data["swv"]
 			if data["per"]=="GPIO":
 				PeripheralMockManager.cpu.gpiosValue[data["gpion"]] = data["gpiov"]
+			if data["per"]=="GPIOREQUEST":
+				PeripheralMockManager.updateGpios() 			
 			if data["per"]=="STDIN":
 				if data["data"]=="\n" or data["data"]=="\r\n":
 					PeripheralMockManager.stdinCondition.acquire()
@@ -106,7 +112,6 @@ class PeripheralMockManager:
 	@staticmethod
 	def updateGpios():
 		PeripheralMockManager.sendData(json.dumps({"per":"GPIO","data":PeripheralMockManager.cpu.gpiosValue,"data2":PeripheralMockManager.cpu.gpiosMode}))
-		#pass
 		
 	@staticmethod
 	def readStdin():
