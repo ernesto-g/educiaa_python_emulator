@@ -261,3 +261,22 @@ class ExtInt:
 			except:
 				break
 	
+class UART:
+	def __init__(self,uartNumber):
+		self.__uartNumber=uartNumber
+		if uartNumber!=0 and uartNumber!=3:
+			raise Exception("Invalid UART number")
+	
+		self.__baudrate = None
+		
+	def init(self,baudrate,bits=8,parity=None,stop=1,timeout=0,timeout_char=0,read_buf_len=2048,packet_mode=False,packet_end_char=None):
+		self.__baudrate = baudrate
+		
+	def write(self,data):
+		PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data,"uartn":self.__uartNumber}))
+		
+	def writechar(self,data):
+		PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data,"uartn":self.__uartNumber}))
+
+	def get_baudrate(self):
+		return self.__baudrate 

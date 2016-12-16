@@ -29,6 +29,7 @@ import time
 import datetime
 from console.Console import Console
 from peripherals.GPIOsPanel import GPIOsPanel
+from peripherals.UARTPanel import UARTPanel
 import json
 
 from threading import Lock
@@ -49,6 +50,7 @@ class PanelEmulator:
 		self.__emulatorLauncher = None
 		self.__basePath = basePath
 		self.gpiosWindow = None
+		self.uartWindow = None
 		
 		try:
 			builder = gtk.Builder()
@@ -163,6 +165,9 @@ class PanelEmulator:
 		elif data["per"]=="GPIO":
 			if self.gpiosWindow!=None:
 				self.gpiosWindow.update(data)
+		elif data["per"]=="UART":
+			if self.uartWindow!=None:
+				self.uartWindow.update(data)
 	
 		
 	def setSocket(self,socket):
@@ -185,7 +190,11 @@ class PanelEmulator:
 		self.gpiosWindow = None
 		
 	def __mnuUart(self,widget,arg):
-		print("se selcciono uart")
+		if self.uartWindow==None:
+			self.uartWindow = UARTPanel(self.__basePath,self.__closeUartWindowEvent,self.__socket,"UART")
+	def __closeUartWindowEvent(self):
+		self.uartWindow = None
+		
 	
 	def __mnu485(self,widget,arg):
 		print("se selcciono rs485")
