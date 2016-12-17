@@ -30,11 +30,12 @@ import datetime
 import json
 
 class UARTPanel:
-	def __init__(self,basePath,closeCallback,socket,title):
-		self.__socket = None
+	def __init__(self,basePath,closeCallback,socket,uartNumber):
+		self.__socket = socket
 		self.__flagFirstTime=True
 		self.__closeCallback=closeCallback
 		self.__flagUpdate=False
+		self.__uartNumber=uartNumber
 		
 		try:
 			builder = gtk.Builder()
@@ -45,7 +46,11 @@ class UARTPanel:
 		self.window = builder.get_object("window1")
 		self.window.connect("destroy", self.__closePanel)
 		self.window.set_icon_from_file(basePath+"/icons/icon.ico")
-		self.window.set_title(title)
+		if self.__uartNumber==0:
+			self.window.set_title("RS485")
+		elif self.__uartNumber==3:
+			self.window.set_title("UART")
+		
 		
 		#console config
 		self.sw = builder.get_object("scrolledwindow1")
@@ -61,6 +66,12 @@ class UARTPanel:
 		textview.get_buffer().set_text("")
 		#_____________
 
+		#send panel
+		self.btnSend = builder.get_object("btnSend")
+		self.txtSend = builder.get_object("txtTosend")
+		self.btnSend.connect("pressed", self.__btnSendEvent, (False))
+		
+		#_____________
 
 			
 		self.window.show_all()
@@ -86,3 +97,8 @@ class UARTPanel:
 		self.__closeCallback()
 		self.window.destroy()
 	
+	def __btnSendEvent(self,a1,a2):
+		if self.__socket!=None:
+			text = self.txtSend.get_text()
+			self.__socket.sendall(json.dumps({"per":"UART","uartn":self.__uartNumber,"data":text}))
+			

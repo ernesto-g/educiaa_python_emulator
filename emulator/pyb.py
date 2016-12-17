@@ -25,6 +25,7 @@ import time
 import threading
 import sys
 import Queue
+from threading import Lock
 
 class CPUMock:
 	def __init__(self):
@@ -33,6 +34,11 @@ class CPUMock:
 		self.gpiosValue = [0,0,0,0,0,0,0,0,0]
 		self.gpiosMode = [0,0,0,0,0,0,0,0,0]
 		self.gpiosPull = [0,0,0,0,0,0,0,0,0]
+		self.uartBuffer = bytearray()
+		self.rs485Buffer = bytearray()
+		self.uartMutex = Lock()
+		self.rs485Mutex = Lock()
+		
 
 class PeripheralMockManager:
 	socket = None
@@ -86,7 +92,22 @@ class PeripheralMockManager:
 			if data["per"]=="GPIO":
 				PeripheralMockManager.cpu.gpiosValue[data["gpion"]] = data["gpiov"]
 			if data["per"]=="GPIOREQUEST":
-				PeripheralMockManager.updateGpios() 			
+				PeripheralMockManager.updateGpios() 	
+
+			if data["per"]=="UART":
+				bytes = bytearray()
+				bytes.extend(data["data"])
+				if data["uartn"]==3:
+					PeripheralMockManager.cpu.uartMutex.acquire()
+					for b in bytes:
+						PeripheralMockManager.cpu.uartBuffer.append(b)
+					PeripheralMockManager.cpu.uartMutex.release()
+				if data["uartn"]==0:
+					PeripheralMockManager.cpu.rs485Mutex.acquire()
+					for b in bytes:
+						PeripheralMockManager.cpu.rs485Buffer.append(b)
+					PeripheralMockManager.cpu.rs485Mutex.release()
+					
 			if data["per"]=="STDIN":
 				if data["data"]=="\n" or data["data"]=="\r\n":
 					PeripheralMockManager.stdinCondition.acquire()
@@ -268,15 +289,84 @@ class UART:
 			raise Exception("Invalid UART number")
 	
 		self.__baudrate = None
+		self.__timeout=0
 		
 	def init(self,baudrate,bits=8,parity=None,stop=1,timeout=0,timeout_char=0,read_buf_len=2048,packet_mode=False,packet_end_char=None):
 		self.__baudrate = baudrate
+		self.__timeout=timeout
+		self.__timeout_char=timeout_char
 		
 	def write(self,data):
-		PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data,"uartn":self.__uartNumber}))
+		if self.__timeout_char==0:
+			PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data,"uartn":self.__uartNumber}))
+		else:
+			for b in data:
+				PeripheralMockManager.sendData(json.dumps({"per":"UART","data":b,"uartn":self.__uartNumber}))
+				time.sleep(self.__timeout_char/1000.0)
 		
 	def writechar(self,data):
 		PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data,"uartn":self.__uartNumber}))
 
 	def get_baudrate(self):
 		return self.__baudrate 
+
+	def any(self):
+		r = False
+		if self.__uartNumber==0:
+			PeripheralMockManager.cpu.rs485Mutex.acquire()
+			if len(PeripheralMockManager.cpu.rs485Buffer)>0:
+				r = True
+			PeripheralMockManager.cpu.rs485Mutex.release()
+		if self.__uartNumber==3:
+			PeripheralMockManager.cpu.uartMutex.acquire()
+			if len(PeripheralMockManager.cpu.uartBuffer)>0:
+				r = True
+			PeripheralMockManager.cpu.uartMutex.release()
+		return r
+
+	def __internal_getByteFromBuffer(self):
+		out = -1
+		if self.__uartNumber==0:
+			PeripheralMockManager.cpu.rs485Mutex.acquire()
+			out = PeripheralMockManager.cpu.rs485Buffer[0]
+			PeripheralMockManager.cpu.rs485Buffer = PeripheralMockManager.cpu.rs485Buffer[1:] #delete the read one
+			PeripheralMockManager.cpu.rs485Mutex.release()
+		if self.__uartNumber==3:
+			PeripheralMockManager.cpu.uartMutex.acquire()
+			out = PeripheralMockManager.cpu.uartBuffer[0]
+			PeripheralMockManager.cpu.uartBuffer = PeripheralMockManager.cpu.uartBuffer[1:] #delete the read one			
+			PeripheralMockManager.cpu.uartMutex.release()
+		return out
+
+	def __internal_waitData(self):
+		t = self.__timeout
+		while t>0 and self.any()==False:
+			time.sleep(0.001) #1ms
+			t=t-1
+	
+	def readchar(self):
+		self.__internal_waitData()
+		if self.any():
+			return self.__internal_getByteFromBuffer()
+		return -1
+		
+	def read(self,nBytes=2049):
+		self.__internal_waitData()
+		c=0
+		out = bytearray()
+		while c<nBytes and self.any(): 
+			b = self.__internal_getByteFromBuffer()
+			out.append(b)
+			c=c+1
+		return out
+		
+	def readall(self):
+		return self.read()
+		
+	def readinto(self,buff,nBytes=2049):
+		out = self.read(nBytes)
+		for b in out:
+			buff.append(b)
+			
+		
+	

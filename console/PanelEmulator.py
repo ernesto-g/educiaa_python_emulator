@@ -191,7 +191,7 @@ class PanelEmulator:
 		
 	def __mnuUart(self,widget,arg):
 		if self.uartWindow==None:
-			self.uartWindow = UARTPanel(self.__basePath,self.__closeUartWindowEvent,self.__socket,"UART")
+			self.uartWindow = UARTPanel(self.__basePath,self.__closeUartWindowEvent,self.__socket,3) #pasar 0 para rs485
 	def __closeUartWindowEvent(self):
 		self.uartWindow = None
 		
