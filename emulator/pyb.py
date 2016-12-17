@@ -96,7 +96,12 @@ class PeripheralMockManager:
 
 			if data["per"]=="UART":
 				bytes = bytearray()
-				bytes.extend(data["data"])
+				try:
+					hexData = str(data["data"]).decode("hex")
+					bytes.extend(hexData)
+				except:
+					pass
+					
 				if data["uartn"]==3:
 					PeripheralMockManager.cpu.uartMutex.acquire()
 					for b in bytes:
@@ -290,19 +295,34 @@ class UART:
 	
 		self.__baudrate = None
 		self.__timeout=0
+		self.__packet_mode=False
+		self.__packet_end_char=None
 		
 	def init(self,baudrate,bits=8,parity=None,stop=1,timeout=0,timeout_char=0,read_buf_len=2048,packet_mode=False,packet_end_char=None):
 		self.__baudrate = baudrate
 		self.__timeout=timeout
 		self.__timeout_char=timeout_char
+		self.__packet_mode=packet_mode
+		self.__packet_end_char=packet_end_char
 		
 	def write(self,data):
+		if isinstance(data, basestring):
+			#data is a string. Convert to hexascii 
+			data = "".join("{:02x}".format(ord(c)) for c in data)
+		elif isinstance(data, bytearray):
+			#data is a bytearray. Convert to hexascii
+			data = "".join("{:02x}".format(c) for c in data)
+		else:
+			return
+	
 		if self.__timeout_char==0:
 			PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data,"uartn":self.__uartNumber}))
 		else:
-			for b in data:
-				PeripheralMockManager.sendData(json.dumps({"per":"UART","data":b,"uartn":self.__uartNumber}))
+			i=0
+			while i<len(data):
+				PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data[i]+data[i+1],"uartn":self.__uartNumber}))
 				time.sleep(self.__timeout_char/1000.0)
+				i=i+2
 		
 	def writechar(self,data):
 		PeripheralMockManager.sendData(json.dumps({"per":"UART","data":data,"uartn":self.__uartNumber}))
@@ -312,16 +332,47 @@ class UART:
 
 	def any(self):
 		r = False
-		if self.__uartNumber==0:
-			PeripheralMockManager.cpu.rs485Mutex.acquire()
-			if len(PeripheralMockManager.cpu.rs485Buffer)>0:
-				r = True
-			PeripheralMockManager.cpu.rs485Mutex.release()
-		if self.__uartNumber==3:
-			PeripheralMockManager.cpu.uartMutex.acquire()
-			if len(PeripheralMockManager.cpu.uartBuffer)>0:
-				r = True
-			PeripheralMockManager.cpu.uartMutex.release()
+		if self.__packet_mode==False:
+			# byte mode
+			if self.__uartNumber==0:
+				PeripheralMockManager.cpu.rs485Mutex.acquire()
+				if len(PeripheralMockManager.cpu.rs485Buffer)>0:
+					r = True
+				PeripheralMockManager.cpu.rs485Mutex.release()
+			if self.__uartNumber==3:
+				PeripheralMockManager.cpu.uartMutex.acquire()
+				if len(PeripheralMockManager.cpu.uartBuffer)>0:
+					r = True
+				PeripheralMockManager.cpu.uartMutex.release()
+		else:
+			#packet mode			
+			if self.__uartNumber==0:
+				PeripheralMockManager.cpu.rs485Mutex.acquire()
+				if self.__timeout==0:
+					#use end char
+					for b in PeripheralMockManager.cpu.rs485Buffer:
+						if b==self.__packet_end_char:
+							r=True
+							break
+				else:
+					#use timeout
+					if len(PeripheralMockManager.cpu.rs485Buffer)>0:
+						r = True
+				PeripheralMockManager.cpu.rs485Mutex.release()
+			if self.__uartNumber==3:
+				PeripheralMockManager.cpu.uartMutex.acquire()
+				if self.__timeout==0:
+					#use end char
+					for b in PeripheralMockManager.cpu.uartBuffer:
+						#print("comparo:"+str(b)+" con:"+str(self.__packet_end_char))
+						if b==self.__packet_end_char:
+							r=True
+							break
+				else:
+					#use timeout
+					if len(PeripheralMockManager.cpu.uartBuffer)>0:
+						r = True
+				PeripheralMockManager.cpu.uartMutex.release()			
 		return r
 
 	def __internal_getByteFromBuffer(self):

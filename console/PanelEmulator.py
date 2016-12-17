@@ -51,6 +51,7 @@ class PanelEmulator:
 		self.__basePath = basePath
 		self.gpiosWindow = None
 		self.uartWindow = None
+		self.rs485Window = None
 		
 		try:
 			builder = gtk.Builder()
@@ -166,8 +167,12 @@ class PanelEmulator:
 			if self.gpiosWindow!=None:
 				self.gpiosWindow.update(data)
 		elif data["per"]=="UART":
-			if self.uartWindow!=None:
-				self.uartWindow.update(data)
+			if data["uartn"]==3:
+				if self.uartWindow!=None:
+					self.uartWindow.update(data)
+			if data["uartn"]==0:
+				if self.rs485Window!=None:
+					self.rs485Window.update(data)
 	
 		
 	def setSocket(self,socket):
@@ -191,20 +196,23 @@ class PanelEmulator:
 		
 	def __mnuUart(self,widget,arg):
 		if self.uartWindow==None:
-			self.uartWindow = UARTPanel(self.__basePath,self.__closeUartWindowEvent,self.__socket,3) #pasar 0 para rs485
+			self.uartWindow = UARTPanel(self.__basePath,self.__closeUartWindowEvent,self.__socket,3) 
 	def __closeUartWindowEvent(self):
 		self.uartWindow = None
 		
 	
 	def __mnu485(self,widget,arg):
-		print("se selcciono rs485")
+		if self.rs485Window==None:
+			self.rs485Window = UARTPanel(self.__basePath,self.__closeRs485WindowEvent,self.__socket,0)
+	def __closeRs485WindowEvent(self):
+		self.rs485Window = None
 	
 	def __mnuTimers(self,widget,arg):
-		print("se selcciono timers")
+		pass
 	
 	def __mnuQuit(self,widget,arg):
 		self.__closePanel(None)
 	
 	def __mnuAbout(self,widget,arg):
-		print("se selcciono about")
+		pass
 	#______________________	
