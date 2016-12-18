@@ -30,6 +30,7 @@ import datetime
 from console.Console import Console
 from peripherals.GPIOsPanel import GPIOsPanel
 from peripherals.UARTPanel import UARTPanel
+from peripherals.PwmPanel import PwmPanel
 import json
 
 from threading import Lock
@@ -107,16 +108,16 @@ class PanelEmulator:
 		self.mnuItem485.connect("activate", self.__mnu485, None)
 		
 		self.mnuItemTimers = builder.get_object("imagemenuitem4")
-		self.mnuItemTimers.set_label("Timers")
-		self.mnuItemTimers.connect("activate", self.__mnuTimers, None)
+		self.mnuItemTimers.set_label("PWM")
+		self.mnuItemTimers.connect("activate", self.__mnuOsc, None)
 
-		self.mnuItemTimers = builder.get_object("imagemenuitem5")
-		self.mnuItemTimers.set_label("Quit")
-		self.mnuItemTimers.connect("activate", self.__mnuQuit, None)
+		self.mnuItemQuit = builder.get_object("imagemenuitem5")
+		self.mnuItemQuit.set_label("Quit")
+		self.mnuItemQuit.connect("activate", self.__mnuQuit, None)
 
-		self.mnuItemTimers = builder.get_object("imagemenuitem10")
-		self.mnuItemTimers.set_label("About")
-		self.mnuItemTimers.connect("activate", self.__mnuAbout, None)
+		self.mnuItemAbout = builder.get_object("imagemenuitem10")
+		self.mnuItemAbout.set_label("About")
+		self.mnuItemAbout.connect("activate", self.__mnuAbout, None)
 		#-----------------------------------------------------------------------------
 		
 		self.window.show_all()
@@ -207,8 +208,8 @@ class PanelEmulator:
 	def __closeRs485WindowEvent(self):
 		self.rs485Window = None
 	
-	def __mnuTimers(self,widget,arg):
-		pass
+	def __mnuOsc(self,widget,arg):
+		self.oscWindow = PwmPanel(self.__basePath,self.__closeRs485WindowEvent,self.__socket)
 	
 	def __mnuQuit(self,widget,arg):
 		self.__closePanel(None)
