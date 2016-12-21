@@ -27,7 +27,7 @@ import json
 import time
 import threading
 import Queue
-
+import traceback
 
 class writer :
 	def write(self, text) :
@@ -65,10 +65,20 @@ class Emulate:
 		time.sleep(1)
 		print("Start execution")
 		sys.stdout = writer()
+		sys.stderr = writer()
 		sys.stdin = reader()
-		execfile(file)
+		try:
+			execfile(file)
+		except Exception as e:
+			formatted_lines = traceback.format_exc().splitlines()
+			i=0
+			for l in formatted_lines:
+				if i!=1 and i!=2: #avoid this file in stacktrace
+					print(l)
+				i=i+1
 		sys.stdout = sys.__stdout__
 		sys.stdin = sys.__stdin__
+		sys.stderr = sys.__stderr__		
 		sock.close()
 		return True
 	
