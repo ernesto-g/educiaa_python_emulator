@@ -41,25 +41,74 @@ class PwmPanel:
 		self.window.set_icon_from_file(basePath+"/icons/icon.ico")
 		self.window.set_title("PWM outs")
 		
+		self.chkList = list()
 		for i in range(0,11):
 			chkPwm = builder.get_object("chkPwm"+str(i))
 			chkPwm.connect("clicked", self.__checkEvent,(i))
-		
+			self.chkList.append(chkPwm)
 		
 		self.area= builder.get_object("drawingarea1")
 		self.plotter = PlotArea(self.area);
 		self.plotter.set_range(0, 4*math.pi, -1.5, 1.5)
 		
+		self.pwmValues = [0,0,0,0,0,0,0,0,0,0,0]
+		self.pwmFreq = 0
+		
+		self.__threadRequestRunning=True
+		self.t = threading.Thread(target=self.__sendStatusRequest)
+		self.t.start()
 		
 		self.window.show_all()
-	
+
+		
+		
+	def __sendStatusRequest(self):
+		while self.__threadRequestRunning:
+			if self.__socket!=None:
+				self.__socket.sendall(json.dumps({"per":"PWMREQUEST"})) # request initial data
+			time.sleep(1)
+			
+
+	def __updateCheckValues(self):
+		i=0
+		for val in self.pwmValues:
+			#print("pwm "+str(i)+" val:"+str(val))
+			self.chkList[i].set_label("PWM_"+str(i)+" ("+str(val)+"%)")
+			i=i+1
+
+	def __updateDrawings(self):
+		index=0
+		for widget in self.chkList:
+			if widget.get_active():
+				self.plotter.addFunction(index,createPwmFunction(self.pwmValues[index]))
+			else:
+				self.plotter.addFunction(index,None)		
+			index+=1
+		self.plotter.updateGraph()
+
+
+	def update(self,data):
+		gtk.gdk.threads_enter()				
+		if data["per"]=="PWM":
+			#print("llego data de pwm")
+			self.__threadRequestRunning=False
+			#print(data["data"])
+			self.pwmValues = data["data"]
+			self.pwmFreq = data["data2"]
+			self.__updateCheckValues()
+			self.__updateDrawings()
+		gtk.gdk.threads_leave()
+		
+		
 	def __checkEvent(self,widget,index):
 		if widget.get_active():
-			self.plotter.addFunction(index,createPwmFunction(5*index))
+			self.plotter.addFunction(index,createPwmFunction(self.pwmValues[index]))
 		else:
 			self.plotter.addFunction(index,None)		
 		self.plotter.updateGraph()
+		pass
 		
 	def __closePanel(self,arg):
+		self.__threadRequestRunning=False
 		self.__closeCallback()
 		self.window.destroy()	

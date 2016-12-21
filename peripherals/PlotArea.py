@@ -1,7 +1,7 @@
 import gtk
 import copy
 
-NPOINTS = 1000
+NPOINTS = 500
 
 class PlotArea:
 

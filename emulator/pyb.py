@@ -38,7 +38,8 @@ class CPUMock:
 		self.rs485Buffer = bytearray()
 		self.uartMutex = Lock()
 		self.rs485Mutex = Lock()
-		
+		self.pwmsValue = [0,0,0,0,0,0,0,0,0,0,0]
+		self.pwmFreq = 0
 
 class PeripheralMockManager:
 	socket = None
@@ -93,6 +94,8 @@ class PeripheralMockManager:
 				PeripheralMockManager.cpu.gpiosValue[data["gpion"]] = data["gpiov"]
 			if data["per"]=="GPIOREQUEST":
 				PeripheralMockManager.updateGpios() 	
+			if data["per"]=="PWMREQUEST":
+				PeripheralMockManager.updatePwms() 	
 
 			if data["per"]=="UART":
 				bytes = bytearray()
@@ -138,7 +141,11 @@ class PeripheralMockManager:
 	@staticmethod
 	def updateGpios():
 		PeripheralMockManager.sendData(json.dumps({"per":"GPIO","data":PeripheralMockManager.cpu.gpiosValue,"data2":PeripheralMockManager.cpu.gpiosMode}))
-		
+	
+	@staticmethod
+	def updatePwms():
+		PeripheralMockManager.sendData(json.dumps({"per":"PWM","data":PeripheralMockManager.cpu.pwmsValue,"data2":PeripheralMockManager.cpu.pwmFreq}))
+	
 	@staticmethod
 	def readStdin():
 		while True:
@@ -419,5 +426,25 @@ class UART:
 		for b in out:
 			buff.append(b)
 			
+		
+	
+class PWM:
+
+	def __init__(self,pwmNumber):
+		if pwmNumber>10 or pwmNumber<0:
+			raise Exception("Invalid PWM number")
+		self.pwmNumber = pwmNumber
+		self.duty = 0
+		
+	@staticmethod
+	def set_frequency(freq):
+		PeripheralMockManager.cpu.pwmFreq = freq
+		PeripheralMockManager.updatePwms()
+		
+	def duty_cycle(self,val=None):
+		if val==None:
+			return PeripheralMockManager.cpu.pwmsValue[self.pwmNumber]
+		PeripheralMockManager.cpu.pwmsValue[self.pwmNumber] = val
+		PeripheralMockManager.updatePwms()
 		
 	

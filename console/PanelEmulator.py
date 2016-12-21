@@ -53,6 +53,7 @@ class PanelEmulator:
 		self.gpiosWindow = None
 		self.uartWindow = None
 		self.rs485Window = None
+		self.pwmWindow = None
 		
 		try:
 			builder = gtk.Builder()
@@ -109,7 +110,7 @@ class PanelEmulator:
 		
 		self.mnuItemTimers = builder.get_object("imagemenuitem4")
 		self.mnuItemTimers.set_label("PWM")
-		self.mnuItemTimers.connect("activate", self.__mnuOsc, None)
+		self.mnuItemTimers.connect("activate", self.__mnuPwm, None)
 
 		self.mnuItemQuit = builder.get_object("imagemenuitem5")
 		self.mnuItemQuit.set_label("Quit")
@@ -167,6 +168,9 @@ class PanelEmulator:
 		elif data["per"]=="GPIO":
 			if self.gpiosWindow!=None:
 				self.gpiosWindow.update(data)
+		elif data["per"]=="PWM":
+			if self.pwmWindow!=None:
+				self.pwmWindow.update(data)
 		elif data["per"]=="UART":
 			if data["uartn"]==3:
 				if self.uartWindow!=None:
@@ -208,8 +212,11 @@ class PanelEmulator:
 	def __closeRs485WindowEvent(self):
 		self.rs485Window = None
 	
-	def __mnuOsc(self,widget,arg):
-		self.oscWindow = PwmPanel(self.__basePath,self.__closeRs485WindowEvent,self.__socket)
+	def __mnuPwm(self,widget,arg):
+		if self.pwmWindow==None:
+			self.pwmWindow = PwmPanel(self.__basePath,self.__closePwmWindowEvent,self.__socket)
+	def __closePwmWindowEvent(self):
+		self.pwmWindow = None
 	
 	def __mnuQuit(self,widget,arg):
 		self.__closePanel(None)
