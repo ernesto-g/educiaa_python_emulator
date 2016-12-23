@@ -41,6 +41,7 @@ class PwmPanel:
 		self.window.set_icon_from_file(basePath+"/icons/icon.ico")
 		self.window.set_title("PWM outs")
 		
+		self.lblFreq = builder.get_object("lblFreq")
 		self.chkList = list()
 		for i in range(0,11):
 			chkPwm = builder.get_object("chkPwm"+str(i))
@@ -75,6 +76,16 @@ class PwmPanel:
 			#print("pwm "+str(i)+" val:"+str(val))
 			self.chkList[i].set_label("PWM_"+str(i)+" ("+str(val)+"%)")
 			i=i+1
+		
+		v=""
+		if self.pwmFreq<1000:
+			v = str(self.pwmFreq)+" Hz"
+		elif self.pwmFreq<1000000:
+			v = str(self.pwmFreq/1000)+" kHz"
+		else:
+			v = str(self.pwmFreq/1000000)+" MHz"
+			
+		self.lblFreq.set_label(v)
 
 	def __updateDrawings(self):
 		index=0
@@ -90,9 +101,7 @@ class PwmPanel:
 	def update(self,data):
 		gtk.gdk.threads_enter()				
 		if data["per"]=="PWM":
-			#print("llego data de pwm")
 			self.__threadRequestRunning=False
-			#print(data["data"])
 			self.pwmValues = data["data"]
 			self.pwmFreq = data["data2"]
 			self.__updateCheckValues()

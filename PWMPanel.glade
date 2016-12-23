@@ -42,7 +42,7 @@
             <property name="x">500</property>
             <property name="y">30</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm2">
             <property name="label" translatable="yes">PWM_2</property>
@@ -57,7 +57,7 @@
             <property name="x">500</property>
             <property name="y">50</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm3">
             <property name="label" translatable="yes">PWM_3</property>
@@ -72,7 +72,7 @@
             <property name="x">500</property>
             <property name="y">70</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm4">
             <property name="label" translatable="yes">PWM_4</property>
@@ -87,7 +87,7 @@
             <property name="x">500</property>
             <property name="y">90</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm5">
             <property name="label" translatable="yes">PWM_5</property>
@@ -102,7 +102,7 @@
             <property name="x">500</property>
             <property name="y">110</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm6">
             <property name="label" translatable="yes">PWM_6</property>
@@ -117,7 +117,7 @@
             <property name="x">500</property>
             <property name="y">130</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm7">
             <property name="label" translatable="yes">PWM_7</property>
@@ -132,7 +132,7 @@
             <property name="x">500</property>
             <property name="y">150</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm8">
             <property name="label" translatable="yes">PWM_8</property>
@@ -147,7 +147,7 @@
             <property name="x">500</property>
             <property name="y">170</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm9">
             <property name="label" translatable="yes">PWM_9</property>
@@ -162,7 +162,7 @@
             <property name="x">500</property>
             <property name="y">190</property>
           </packing>
-        </child>	
+        </child>
         <child>
           <object class="GtkCheckButton" id="chkPwm10">
             <property name="label" translatable="yes">PWM_10</property>
@@ -177,7 +177,19 @@
             <property name="x">500</property>
             <property name="y">210</property>
           </packing>
-        </child>			
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblFreq">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">label</property>
+          </object>
+          <packing>
+            <property name="x">490</property>
+            <property name="y">241</property>
+          </packing>
+        </child>
       </object>
     </child>
   </object>

@@ -40,6 +40,7 @@ class CPUMock:
 		self.rs485Mutex = Lock()
 		self.pwmsValue = [0,0,0,0,0,0,0,0,0,0,0]
 		self.pwmFreq = 0
+		self.adcValues = [0,0,0]
 
 class PeripheralMockManager:
 	socket = None
@@ -96,6 +97,10 @@ class PeripheralMockManager:
 				PeripheralMockManager.updateGpios() 	
 			if data["per"]=="PWMREQUEST":
 				PeripheralMockManager.updatePwms() 	
+			if data["per"]=="ADC":
+				index = data["data"]
+				value = data["data2"]
+				PeripheralMockManager.cpu.adcValues[index] = value	
 
 			if data["per"]=="UART":
 				bytes = bytearray()
@@ -446,5 +451,16 @@ class PWM:
 			return PeripheralMockManager.cpu.pwmsValue[self.pwmNumber]
 		PeripheralMockManager.cpu.pwmsValue[self.pwmNumber] = val
 		PeripheralMockManager.updatePwms()
+		
+	
+class ADC:
+	
+	def __init__(self,adcNumber):
+		if adcNumber>3 or adcNumber<=0:
+			raise Exception("Invalid ADC number")
+		self.adcNumber = adcNumber - 1
+		
+	def read(self):
+		return PeripheralMockManager.cpu.adcValues[self.adcNumber]
 		
 	

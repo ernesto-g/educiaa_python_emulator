@@ -31,6 +31,7 @@ from console.Console import Console
 from peripherals.GPIOsPanel import GPIOsPanel
 from peripherals.UARTPanel import UARTPanel
 from peripherals.PwmPanel import PwmPanel
+from peripherals.ADCPanel import ADCPanel
 import json
 
 from threading import Lock
@@ -54,6 +55,7 @@ class PanelEmulator:
 		self.uartWindow = None
 		self.rs485Window = None
 		self.pwmWindow = None
+		self.adcWindow = None
 		
 		try:
 			builder = gtk.Builder()
@@ -112,6 +114,11 @@ class PanelEmulator:
 		self.mnuItemTimers.set_label("PWM")
 		self.mnuItemTimers.connect("activate", self.__mnuPwm, None)
 
+		self.mnuItemTimers = builder.get_object("imagemenuitem6")
+		self.mnuItemTimers.set_label("ADC")
+		self.mnuItemTimers.connect("activate", self.__mnuAdc, None)
+
+		
 		self.mnuItemQuit = builder.get_object("imagemenuitem5")
 		self.mnuItemQuit.set_label("Quit")
 		self.mnuItemQuit.connect("activate", self.__mnuQuit, None)
@@ -218,6 +225,14 @@ class PanelEmulator:
 	def __closePwmWindowEvent(self):
 		self.pwmWindow = None
 	
+	def __mnuAdc(self,widget,arg):
+		if self.adcWindow==None:
+			self.adcWindow =  ADCPanel(self.__basePath,self.__closeAdcWindowEvent,self.__socket)
+	def __closeAdcWindowEvent(self):
+		self.adcWindow = None
+
+		
+		
 	def __mnuQuit(self,widget,arg):
 		self.__closePanel(None)
 	
