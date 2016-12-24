@@ -26,6 +26,8 @@ import threading
 import sys
 import Queue
 from threading import Lock
+import os
+import struct
 
 class CPUMock:
 	def __init__(self):
@@ -524,4 +526,100 @@ class DAC:
 		PeripheralMockManager.cpu.dacFreq = freq / len(buf)
 		PeripheralMockManager.updateDac()
 	
+class EEPROM:
+
+	__CONFIG_FILENAME = ".educiaapythonemulatoreeprom.dat"
+	
+	def __init__(self):
+		try:
+			from win32com.shell import shellcon, shell            
+			self.homedir = shell.SHGetFolderPath(0, shellcon.CSIDL_APPDATA, 0, 0)
+		except ImportError:
+			self.homedir = os.path.expanduser("~")		
+		self.homedir = os.path.join(self.homedir,".educiaa-python-emulator")
+		if not os.path.exists(self.homedir):
+			os.makedirs(self.homedir)
+		#print("Home dir:"+self.homedir)
+		self.absolutePath = os.path.join(self.homedir,EEPROM.__CONFIG_FILENAME)
+		if not os.path.exists(self.absolutePath):
+			self.__createCleanFile()
+		
+	def write_byte(self,addr,val):
+		if addr>=(16*1024):
+			raise Exception("Invalid address")
+		with open(self.absolutePath, 'r+b') as f:
+			f.seek(addr)
+			b = bytearray()
+			b.append(val&0xFF)
+			f.write(b)
+
+	def write_int(self,addr,val):
+		bytes = struct.pack("<I", val)
+		for b in bytes:
+			self.write_byte(addr,ord(b))
+			addr+=1
+		
+		
+	def write_float(self,addr,val):
+		bytes = struct.pack("<f", val)
+		for b in bytes:
+			self.write_byte(addr,ord(b))
+			addr+=1
+		
+	def write(self,val):
+		addr=0
+		for b in val:
+			self.write_byte(addr,ord(b))
+			addr+=1
+
+
+			
+	def read_byte(self,addr):
+		r = -1
+		if addr>=(16*1024):
+			raise Exception("Invalid address")
+		with open(self.absolutePath, 'r+b') as f:
+			f.seek(addr)
+			r = f.read(1)
+			b = bytearray()
+			b.append(r)
+			return b[0]
+		return r	
+
+	def read_int(self,addr):
+		b0 = self.read_byte(addr)
+		b1 = self.read_byte(addr+1)
+		b2 = self.read_byte(addr+2)
+		b3 = self.read_byte(addr+3)
+		return b3<<24 | b2<<16 | b1<<8 | b0
+
+	def read_float(self,addr):
+		b0 = self.read_byte(addr)
+		b1 = self.read_byte(addr+1)
+		b2 = self.read_byte(addr+2)
+		b3 = self.read_byte(addr+3)
+		b = bytearray()
+		b.append(b0)
+		b.append(b1)
+		b.append(b2)
+		b.append(b3)
+		f = struct.unpack("<f", str(b))
+		return f[0]
+		
+	def readall(self):
+		out = bytearray()
+		addr=0
+		while True:
+			b = self.read_byte(addr)
+			if b==0x00:
+				break
+			out.append(b)
+			addr+=1
+				
+		return str(out)
+		
+	def __createCleanFile(self):
+		with open(self.absolutePath, 'wb') as f:
+			myArr = bytearray(16*1024)
+			f.write(myArr)
 	
