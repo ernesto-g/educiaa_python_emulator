@@ -32,6 +32,7 @@ from peripherals.GPIOsPanel import GPIOsPanel
 from peripherals.UARTPanel import UARTPanel
 from peripherals.PwmPanel import PwmPanel
 from peripherals.ADCPanel import ADCPanel
+from peripherals.DACPanel import DACPanel
 import json
 
 from threading import Lock
@@ -56,6 +57,7 @@ class PanelEmulator:
 		self.rs485Window = None
 		self.pwmWindow = None
 		self.adcWindow = None
+		self.dacWindow = None
 		
 		try:
 			builder = gtk.Builder()
@@ -114,12 +116,15 @@ class PanelEmulator:
 		self.mnuItemTimers.set_label("PWM")
 		self.mnuItemTimers.connect("activate", self.__mnuPwm, None)
 
-		self.mnuItemTimers = builder.get_object("imagemenuitem6")
+		self.mnuItemTimers = builder.get_object("imagemenuitem5")
 		self.mnuItemTimers.set_label("ADC")
 		self.mnuItemTimers.connect("activate", self.__mnuAdc, None)
 
+		self.mnuItemTimers = builder.get_object("imagemenuitem6")
+		self.mnuItemTimers.set_label("DAC")
+		self.mnuItemTimers.connect("activate", self.__mnuDac, None)
 		
-		self.mnuItemQuit = builder.get_object("imagemenuitem5")
+		self.mnuItemQuit = builder.get_object("imagemenuitem7")
 		self.mnuItemQuit.set_label("Quit")
 		self.mnuItemQuit.connect("activate", self.__mnuQuit, None)
 
@@ -178,6 +183,9 @@ class PanelEmulator:
 		elif data["per"]=="PWM":
 			if self.pwmWindow!=None:
 				self.pwmWindow.update(data)
+		elif data["per"]=="DAC":
+			if self.dacWindow!=None:
+				self.dacWindow.update(data)
 		elif data["per"]=="UART":
 			if data["uartn"]==3:
 				if self.uartWindow!=None:
@@ -231,6 +239,13 @@ class PanelEmulator:
 	def __closeAdcWindowEvent(self):
 		self.adcWindow = None
 
+	def __mnuDac(self,widget,arg):
+		if self.dacWindow==None:
+			self.dacWindow =  DACPanel(self.__basePath,self.__closeDacWindowEvent,self.__socket)
+	def __closeDacWindowEvent(self):
+		self.dacWindow = None
+		
+		
 		
 		
 	def __mnuQuit(self,widget,arg):

@@ -41,6 +41,9 @@ class CPUMock:
 		self.pwmsValue = [0,0,0,0,0,0,0,0,0,0,0]
 		self.pwmFreq = 0
 		self.adcValues = [0,0,0]
+		self.dacMode = 0
+		self.dacFreq = 0
+		self.dacData = None
 
 class PeripheralMockManager:
 	socket = None
@@ -97,6 +100,8 @@ class PeripheralMockManager:
 				PeripheralMockManager.updateGpios() 	
 			if data["per"]=="PWMREQUEST":
 				PeripheralMockManager.updatePwms() 	
+			if data["per"]=="DACREQUEST":
+				PeripheralMockManager.updateDac() 	
 			if data["per"]=="ADC":
 				index = data["data"]
 				value = data["data2"]
@@ -151,6 +156,10 @@ class PeripheralMockManager:
 	def updatePwms():
 		PeripheralMockManager.sendData(json.dumps({"per":"PWM","data":PeripheralMockManager.cpu.pwmsValue,"data2":PeripheralMockManager.cpu.pwmFreq}))
 	
+	@staticmethod
+	def updateDac():
+		PeripheralMockManager.sendData(json.dumps({"per":"DAC","data":PeripheralMockManager.cpu.dacMode,"data2":PeripheralMockManager.cpu.dacFreq,"data3":PeripheralMockManager.cpu.dacData}))
+
 	@staticmethod
 	def readStdin():
 		while True:
@@ -463,4 +472,56 @@ class ADC:
 	def read(self):
 		return PeripheralMockManager.cpu.adcValues[self.adcNumber]
 		
+class DAC:
+
+	__MODE_VAL = 0
+	__MODE_NOISE = 1
+	__MODE_TRIAN = 2
+	__MODE_TIMED = 3
+
+	CIRCULAR = 0
+	NORMAL = 1
+	
+	
+	def __init__(self,dacNumber):
+		if dacNumber>3 or dacNumber<=0:
+			raise Exception("Invalid DAC number")
+			
+		PeripheralMockManager.cpu.dacMode = DAC.__MODE_VAL
+		self.timedMode = DAC.CIRCULAR
+		
+	def write(self,v):
+		PeripheralMockManager.cpu.dacMode = DAC.__MODE_VAL
+		if PeripheralMockManager.cpu.dacData == None:
+			PeripheralMockManager.cpu.dacData = list()
+			PeripheralMockManager.cpu.dacData.append(int(v))
+		else:
+			PeripheralMockManager.cpu.dacData[0] = int(v)
+		PeripheralMockManager.updateDac()
+		
+	def noise(self,f):
+		PeripheralMockManager.cpu.dacMode = DAC.__MODE_NOISE
+		PeripheralMockManager.cpu.dacFreq = f
+		PeripheralMockManager.updateDac()
+		
+	def triangle(self,f):
+		PeripheralMockManager.cpu.dacMode = DAC.__MODE_TRIAN
+		PeripheralMockManager.cpu.dacFreq = f
+		PeripheralMockManager.updateDac()
+	
+	def write_timed(self,data,freq,mode):
+		PeripheralMockManager.cpu.dacMode = DAC.__MODE_TIMED
+		buf = list()
+		index=0
+		while index<len(data):
+			l = data[index]
+			index+=1
+			h = data[index]
+			index+=1			
+			buf.append(int(h<<8|l))
+		PeripheralMockManager.cpu.dacData = buf
+		self.timedMode = mode
+		PeripheralMockManager.cpu.dacFreq = freq / len(buf)
+		PeripheralMockManager.updateDac()
+	
 	
