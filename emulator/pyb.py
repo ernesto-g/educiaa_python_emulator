@@ -552,12 +552,14 @@ class EEPROM:
 			b = bytearray()
 			b.append(val&0xFF)
 			f.write(b)
+		return 1
 
 	def write_int(self,addr,val):
 		bytes = struct.pack("<I", val)
 		for b in bytes:
 			self.write_byte(addr,ord(b))
 			addr+=1
+		return 4
 		
 		
 	def write_float(self,addr,val):
@@ -565,13 +567,15 @@ class EEPROM:
 		for b in bytes:
 			self.write_byte(addr,ord(b))
 			addr+=1
+		return 4
 		
 	def write(self,val):
 		addr=0
 		for b in val:
 			self.write_byte(addr,ord(b))
 			addr+=1
-
+		self.write_byte(addr,0x00)
+		return addr+1
 
 			
 	def read_byte(self,addr):
