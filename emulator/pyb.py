@@ -626,4 +626,120 @@ class EEPROM:
 		with open(self.absolutePath, 'wb') as f:
 			myArr = bytearray(16*1024)
 			f.write(myArr)
+
+class Timer:
+
+	def __init__(self,timerNumber):
+		if timerNumber<0 or timerNumber>3:
+			raise Exception("Invalid timer number")
+		self.__timerNumber = timerNumber
+		self.__callbackFn = None
+		self.__timeoutVal = 0
+		self.__flagTimeoutInterval = True
+		self.__pill2kill = None
+		
+		self.__freq = -1
+		self.__counterTs = -1
+		self.__presc = -1
+		self.__period = -1
+		
+	def __run(self,stop_event, arg):
+		self.__counterTs = time.time()
+		while True:
+			if stop_event.wait(self.__timeoutVal/1000.0) == False:
+				if self.__callbackFn!=None:
+					self.__callbackFn(self)
+					self.__counterTs = time.time()
+					if self.__flagTimeoutInterval:
+						break
+			else:
+				break
+				
+
+	def init(self,freq=-1,prescaler=-1,period=-1):
+
+		if freq==-1 and prescaler==-1 and period==-1:
+			raise Exception("Invalid values")
+		self.__freq = freq
+		self.__period = period
+		self.__presc = prescaler
+		
+		#freq mode
+		if self.__freq>0:
+			self.__presc = 0
+			self.__period = 208000000/self.__freq
+			to = (1.0/self.__freq)*1000.0
+			self.interval(to,self.__callbackFn)			
+		#_________
+
+		#period mode
+		elif self.__period>0:
+			self.__freq=0
+			tickTime = (1.0/208000000.0)
+			to = (tickTime*self.__period)*1000.0
+			if self.__presc>0:
+				to = to*self.__presc
+			self.interval(to,self.__callbackFn)						
+		#_________
+			
+
+		
+		
+	def counter(self,val=-1):
+		"""
+		if val==-1:
+			ts1 = time.time()
+			delta = ts1 - self.__counterTs
+			#tickTime = (1.0/208000000.0)
+			#return delta / tickTime
+			c = delta * 208000000.0
+			if self.__presc>0:
+				c = c / self.__presc
+			return int(c)
+		"""
+		print("**WARNING** 'counter()' Method not implemented in emulator.")
+		return 0
+		
+	def freq(self,val=-1):
+		if val>0:
+			self.init(freq=val)
+		return self.__freq
+		
+	def prescaler(self,val=-1):
+		if val>0:
+			self.init(prescaler=val,period=self.__period)
+		return self.__presc
+	def period(self,val=-1):
+		if val>0:
+			self.init(prescaler=self.__presc,period=val)
+		return self.__period	
+		
+	
+	def interval(self,timeout,fn):
+		if self.__pill2kill!=None:
+			self.__pill2kill.set()
+		self.__flagTimeoutInterval = False
+		self.__callbackFn = fn
+		self.__timeoutVal = timeout
+		self.__pill2kill = threading.Event()
+		t = threading.Thread(target=self.__run, args=(self.__pill2kill, "task"))
+		t.start()
+
+	def timeout(self,timeout,fn):
+		if self.__pill2kill!=None:
+			self.__pill2kill.set()
+		self.__flagTimeoutInterval = True
+		self.__callbackFn = fn
+		self.__timeoutVal= timeout
+		self.__pill2kill = threading.Event()
+		t = threading.Thread(target=self.__run, args=(self.__pill2kill, "task"))
+		t.start()
+
+	def callback(self,fn):
+		self.__callbackFn = fn
+		
+	def source_freq(self):
+		return 208000000
+		
+	
 	
