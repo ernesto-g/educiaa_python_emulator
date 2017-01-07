@@ -166,7 +166,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm10">
             <property name="label" translatable="yes">PWM_10</property>
-            <property name="width_request">110</property>
+            <property name="width_request">120</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
