@@ -16,7 +16,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm0">
             <property name="label" translatable="yes">PWM_0</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -31,7 +31,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm1">
             <property name="label" translatable="yes">PWM_1</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -46,7 +46,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm2">
             <property name="label" translatable="yes">PWM_2</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -61,7 +61,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm3">
             <property name="label" translatable="yes">PWM_3</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -76,7 +76,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm4">
             <property name="label" translatable="yes">PWM_4</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -91,7 +91,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm5">
             <property name="label" translatable="yes">PWM_5</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -106,7 +106,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm6">
             <property name="label" translatable="yes">PWM_6</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -121,7 +121,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm7">
             <property name="label" translatable="yes">PWM_7</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -136,7 +136,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm8">
             <property name="label" translatable="yes">PWM_8</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -151,7 +151,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm9">
             <property name="label" translatable="yes">PWM_9</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -166,7 +166,7 @@
         <child>
           <object class="GtkCheckButton" id="chkPwm10">
             <property name="label" translatable="yes">PWM_10</property>
-            <property name="width_request">100</property>
+            <property name="width_request">130</property>
             <property name="height_request">20</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
