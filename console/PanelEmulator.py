@@ -36,6 +36,9 @@ from peripherals.DACPanel import DACPanel
 import json
 
 from threading import Lock
+
+VERSION = "1.2"
+
 class SocketMultiThread:
 	def __init__(self,socket):
 		self.socket = socket
@@ -69,7 +72,7 @@ class PanelEmulator:
 		self.window = builder.get_object("window1")
 		self.window.connect("destroy", self.__closePanel)
 		self.window.set_icon_from_file(basePath+"/icons/icon.ico")
-		self.window.set_title("EDU-CIAA Emulator Panel")
+		self.window.set_title("EDU-CIAA Emulator Panel "+VERSION)
 
 		self.buttonOk = builder.get_object("btnSw1")
 		self.buttonOk.connect("pressed", self.__btnSw1, (False))
@@ -252,5 +255,36 @@ class PanelEmulator:
 		self.__closePanel(None)
 	
 	def __mnuAbout(self,widget,arg):
-		pass
+		# show standard gtk about window
+		def show_about():
+			about_dialog = gtk.AboutDialog()
+			about_dialog.set_transient_for(self.window)
+			about_dialog.set_destroy_with_parent(True)
+			about_dialog.set_name("EDU-CIAA Python Emulator")
+			about_dialog.set_version(VERSION)
+			about_dialog.set_copyright("")
+			about_dialog.set_website("https://github.com/ernesto-g/educiaa_python_emulator")
+			about_dialog.set_comments("Ernesto Gigliotti <2016-2017>\nGNU License.")
+			#about_dialog.set_authors("Ernesto Gigliotti")
+			#about_dialog.set_logo_icon_name(gtk.STOCK_EDIT)	
+			#img = gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(BASE_PATH,"splash.png"), 80, 45)
+			#about_dialog.set_logo(img)
+
+			# callbacks for destroying the about dialog
+			def close(dialog, response, editor):
+				editor.about_dialog = None
+				dialog.destroy()
+
+			def delete_event(dialog, event, editor):
+				editor.about_dialog = None
+				return True
+
+			about_dialog.connect("response", close, self)
+			about_dialog.connect("delete-event", delete_event, self)
+
+			self.about_dialog = about_dialog
+			about_dialog.show()
+
+		# run functions
+		show_about()
 	#______________________	
