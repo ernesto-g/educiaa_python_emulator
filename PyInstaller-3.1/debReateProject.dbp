@@ -1,95 +1,101 @@
 [DEBREATE-0.7.10]
 <<CTRL>>
 Package: educiaa-python-emulator
-Version: 1.0
+Version: 1.2
 Maintainer: Ernesto Gigliotti <ernestogigliotti@gmail.com>
 Priority: optional
 Architecture: amd64
+Depends: python-gtk2
 Description: EDU-CIAA Python Emulator
 
 <</CTRL>>
 <<FILES>>
 1
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/icons/icon.ico -> icon.ico -> /opt/educiaa-python-emulator-1.0/icons
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXinerama.so.1* -> libXinerama.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libxml2.so.2* -> libxml2.so.2 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXi.so.6* -> libXi.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libbz2.so.1.0* -> libbz2.so.1.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXcursor.so.1* -> libXcursor.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_ssl.x86_64-linux-gnu.so* -> _ssl.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libreadline.so.6* -> libreadline.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libfreetype.so.6* -> libfreetype.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/pango.x86_64-linux-gnu.so* -> pango.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libglade-2.0.so.0* -> libglade-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libcrypto.so.1.0.0* -> libcrypto.so.1.0.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpangoft2-1.0.so.0* -> libpangoft2-1.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libatk-1.0.so.0* -> libatk-1.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpyglib-2.0-python2.7.so.0* -> libpyglib-2.0-python2.7.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgobject-2.0.so.0* -> libgobject-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXrender.so.1* -> libXrender.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libxcb-render.so.0* -> libxcb-render.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libtinfo.so.5* -> libtinfo.so.5 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_ctypes.x86_64-linux-gnu.so* -> _ctypes.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/bz2.x86_64-linux-gnu.so* -> bz2.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXdamage.so.1* -> libXdamage.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libharfbuzz.so.0* -> libharfbuzz.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXdmcp.so.6* -> libXdmcp.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gio.unix.x86_64-linux-gnu.so* -> gio.unix.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_hk.x86_64-linux-gnu.so* -> _codecs_hk.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libffi.so.6* -> libffi.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libcairo.so.2* -> libcairo.so.2 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_tw.x86_64-linux-gnu.so* -> _codecs_tw.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/datetime.x86_64-linux-gnu.so* -> datetime.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXau.so.6* -> libXau.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/atk.x86_64-linux-gnu.so* -> atk.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpangocairo-1.0.so.0* -> libpangocairo-1.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXrandr.so.2* -> libXrandr.so.2 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gobject._gobject.x86_64-linux-gnu.so* -> gobject._gobject.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_hashlib.x86_64-linux-gnu.so* -> _hashlib.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/cairo._cairo.x86_64-linux-gnu.so* -> cairo._cairo.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libz.so.1* -> libz.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_kr.x86_64-linux-gnu.so* -> _codecs_kr.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_json.x86_64-linux-gnu.so* -> _json.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/educiaa.png -> educiaa.png -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_multibytecodec.x86_64-linux-gnu.so* -> _multibytecodec.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgraphite2.so.3* -> libgraphite2.so.3 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libdatrie.so.1* -> libdatrie.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_jp.x86_64-linux-gnu.so* -> _codecs_jp.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXfixes.so.3* -> libXfixes.so.3 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgtk-x11-2.0.so.0* -> libgtk-x11-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpixman-1.so.0* -> libpixman-1.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXcomposite.so.1* -> libXcomposite.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgdk-x11-2.0.so.0* -> libgdk-x11-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpcre.so.3* -> libpcre.so.3 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgthread-2.0.so.0* -> libgthread-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/resource.x86_64-linux-gnu.so* -> resource.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgmodule-2.0.so.0* -> libgmodule-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gtk.glade.x86_64-linux-gnu.so* -> gtk.glade.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/EmulatorLauncher* -> EmulatorLauncher -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libfontconfig.so.1* -> libfontconfig.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgdk_pixbuf-2.0.so.0* -> libgdk_pixbuf-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libxcb-shm.so.0* -> libxcb-shm.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/EmulatorPanel.glade -> EmulatorPanel.glade -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/liblzma.so.5* -> liblzma.so.5 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpng12.so.0* -> libpng12.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libselinux.so.1* -> libselinux.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpango-1.0.so.0* -> libpango-1.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libthai.so.0* -> libthai.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gtk._gtk.x86_64-linux-gnu.so* -> gtk._gtk.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/pangocairo.x86_64-linux-gnu.so* -> pangocairo.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libssl.so.1.0.0* -> libssl.so.1.0.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_iso2022.x86_64-linux-gnu.so* -> _codecs_iso2022.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_cn.x86_64-linux-gnu.so* -> _codecs_cn.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libglib-2.0.so.0* -> libglib-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/readline.x86_64-linux-gnu.so* -> readline.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libexpat.so.1* -> libexpat.so.1 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libX11.so.6* -> libX11.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgio-2.0.so.0* -> libgio-2.0.so.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/termios.x86_64-linux-gnu.so* -> termios.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpython2.7.so.1.0* -> libpython2.7.so.1.0 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXext.so.6* -> libXext.so.6 -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gio._gio.x86_64-linux-gnu.so* -> gio._gio.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
-/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/glib._glib.x86_64-linux-gnu.so* -> glib._glib.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator-1.0
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/icons/icon.ico -> icon.ico -> /opt/educiaa-python-emulator/icons
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXinerama.so.1* -> libXinerama.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libxml2.so.2* -> libxml2.so.2 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/PWMPanel.glade -> PWMPanel.glade -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXi.so.6* -> libXi.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libbz2.so.1.0* -> libbz2.so.1.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXcursor.so.1* -> libXcursor.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_ssl.x86_64-linux-gnu.so* -> _ssl.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libreadline.so.6* -> libreadline.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libfreetype.so.6* -> libfreetype.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/pango.x86_64-linux-gnu.so* -> pango.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/ADCPanel.glade -> ADCPanel.glade -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libglade-2.0.so.0* -> libglade-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libcrypto.so.1.0.0* -> libcrypto.so.1.0.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpangoft2-1.0.so.0* -> libpangoft2-1.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libatk-1.0.so.0* -> libatk-1.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpyglib-2.0-python2.7.so.0* -> libpyglib-2.0-python2.7.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgobject-2.0.so.0* -> libgobject-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXrender.so.1* -> libXrender.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libxcb-render.so.0* -> libxcb-render.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libtinfo.so.5* -> libtinfo.so.5 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_ctypes.x86_64-linux-gnu.so* -> _ctypes.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/bz2.x86_64-linux-gnu.so* -> bz2.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXdamage.so.1* -> libXdamage.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libharfbuzz.so.0* -> libharfbuzz.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXdmcp.so.6* -> libXdmcp.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gio.unix.x86_64-linux-gnu.so* -> gio.unix.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_hk.x86_64-linux-gnu.so* -> _codecs_hk.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libffi.so.6* -> libffi.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libcairo.so.2* -> libcairo.so.2 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_tw.x86_64-linux-gnu.so* -> _codecs_tw.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/datetime.x86_64-linux-gnu.so* -> datetime.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXau.so.6* -> libXau.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/UARTPanel.glade -> UARTPanel.glade -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/atk.x86_64-linux-gnu.so* -> atk.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpangocairo-1.0.so.0* -> libpangocairo-1.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXrandr.so.2* -> libXrandr.so.2 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gobject._gobject.x86_64-linux-gnu.so* -> gobject._gobject.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_hashlib.x86_64-linux-gnu.so* -> _hashlib.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/cairo._cairo.x86_64-linux-gnu.so* -> cairo._cairo.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libz.so.1* -> libz.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_kr.x86_64-linux-gnu.so* -> _codecs_kr.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_json.x86_64-linux-gnu.so* -> _json.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/educiaa.png -> educiaa.png -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_multibytecodec.x86_64-linux-gnu.so* -> _multibytecodec.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgraphite2.so.3* -> libgraphite2.so.3 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libdatrie.so.1* -> libdatrie.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_jp.x86_64-linux-gnu.so* -> _codecs_jp.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXfixes.so.3* -> libXfixes.so.3 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgtk-x11-2.0.so.0* -> libgtk-x11-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpixman-1.so.0* -> libpixman-1.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXcomposite.so.1* -> libXcomposite.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgdk-x11-2.0.so.0* -> libgdk-x11-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpcre.so.3* -> libpcre.so.3 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgthread-2.0.so.0* -> libgthread-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/resource.x86_64-linux-gnu.so* -> resource.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgmodule-2.0.so.0* -> libgmodule-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gtk.glade.x86_64-linux-gnu.so* -> gtk.glade.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/EmulatorLauncher* -> EmulatorLauncher -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libfontconfig.so.1* -> libfontconfig.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgdk_pixbuf-2.0.so.0* -> libgdk_pixbuf-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libxcb-shm.so.0* -> libxcb-shm.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/EmulatorPanel.glade -> EmulatorPanel.glade -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/liblzma.so.5* -> liblzma.so.5 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpng12.so.0* -> libpng12.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libselinux.so.1* -> libselinux.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpango-1.0.so.0* -> libpango-1.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libthai.so.0* -> libthai.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gtk._gtk.x86_64-linux-gnu.so* -> gtk._gtk.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/pangocairo.x86_64-linux-gnu.so* -> pangocairo.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/DACPanel.glade -> DACPanel.glade -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libssl.so.1.0.0* -> libssl.so.1.0.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_iso2022.x86_64-linux-gnu.so* -> _codecs_iso2022.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/_codecs_cn.x86_64-linux-gnu.so* -> _codecs_cn.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libglib-2.0.so.0* -> libglib-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/GPIOsPanel.glade -> GPIOsPanel.glade -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/readline.x86_64-linux-gnu.so* -> readline.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libexpat.so.1* -> libexpat.so.1 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libX11.so.6* -> libX11.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libgio-2.0.so.0* -> libgio-2.0.so.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/termios.x86_64-linux-gnu.so* -> termios.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libpython2.7.so.1.0* -> libpython2.7.so.1.0 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/libXext.so.6* -> libXext.so.6 -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/gio._gio.x86_64-linux-gnu.so* -> gio._gio.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
+/home/android/especializacion/educiaa_python_emulator/PyInstaller-3.1/EmulatorLauncher/dist/EmulatorLauncher/glib._glib.x86_64-linux-gnu.so* -> glib._glib.x86_64-linux-gnu.so -> /opt/educiaa-python-emulator
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
